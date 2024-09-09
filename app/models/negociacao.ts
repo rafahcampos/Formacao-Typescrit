@@ -1,7 +1,7 @@
 export class Negociacao {
 
     constructor(
-        public _data: Date,
+        private _data: Date,
         public readonly quantidade: number,
         public readonly valor: number
     ) { }
@@ -13,5 +13,14 @@ export class Negociacao {
     
     get volume(): number {
         return this.quantidade * this.valor;
+    }
+
+    //vai retornar uma intancis dela mesma convertida
+    public static criaDe(dataString:string, quantidadeString:string, valorString:string):Negociacao{
+        const exp = /-/g; //Expressões regulares, 'g' de global
+        const date = new Date(dataString.replace(exp, ","));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, quantidade, valor);
     }
 }
